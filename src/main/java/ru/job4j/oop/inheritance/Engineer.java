@@ -2,11 +2,10 @@ package ru.job4j.oop.inheritance;
 
 public class Engineer extends Profession {
     private boolean engineerDegree;
-    private int workExperience;
 
-    public Engineer(boolean engineerDegree, int workExperience) {
-        super();
-        this.engineerDegree = engineerDegree;
-        this.workExperience = workExperience;
+    public Engineer(String name, String surname, String education, String birthday,
+                    boolean degree) {
+        super(name, surname, education, birthday);
+        this.engineerDegree = degree;
     }
 }
