@@ -17,7 +17,7 @@ public class Library {
         bookArray[0] = bookArray[3];
         bookArray[3] = temp;
         for (int i = 0; i < bookArray.length; i++) {
-            if (bookArray[i].getName().equals("Clean code")) {
+            if ("Clean code".equals(bookArray[i].getName())) {
                 System.out.println("Книга называется: "
                         + bookArray[i].getName() + ". "
                         + "Количество страниц в книге: "
