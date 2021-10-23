@@ -1,5 +1,6 @@
 package ru.job4j.search;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,5 +16,12 @@ public class PhoneDictionaryTest {
         );
         ArrayList<Person> persons = phones.find("Petr");
         assertThat(persons.get(0).getSurname(), is("Arsentev"));
+    }
+
+    @Test
+    public void whenPhonesEmpty() {
+        PhoneDictionary phones = new PhoneDictionary();
+        ArrayList<Person> persons = phones.find("Petr");
+        Assert.assertEquals(0, persons.size());
     }
 }
