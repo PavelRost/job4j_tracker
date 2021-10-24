@@ -3,6 +3,9 @@ package ru.job4j.tracker;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -89,5 +92,35 @@ public class TrackerTest {
         int id = bug.getId();
         tracker.delete(id);
         assertThat(tracker.findById(id), is(Matchers.nullValue()));
+    }
+
+    @Test
+    public void whenItemsSortedByIdAsc() {
+        Tracker tracker = new Tracker();
+        Item bug = new Item(1, "Exception 1");
+        Item bug2 = new Item(2, "Exception 2");
+        Item bug3 = new Item(3, "Exc. 3");
+        tracker.add(bug);
+        tracker.add(bug2);
+        tracker.add(bug3);
+        List<Item> allItems = tracker.findAll();
+        Collections.sort(allItems, new SortByIdItemAsc());
+        List<Item> expected = Arrays.asList(bug, bug2, bug3);
+        assertThat(allItems, is(expected));
+    }
+
+    @Test
+    public void whenItemSortedByIfDesc() {
+        Tracker tracker = new Tracker();
+        Item bug = new Item(1, "Exception 1");
+        Item bug2 = new Item(2, "Exception 2");
+        Item bug3 = new Item(3, "Exc. 3");
+        tracker.add(bug);
+        tracker.add(bug2);
+        tracker.add(bug3);
+        List<Item> allItems = tracker.findAll();
+        Collections.sort(allItems, new SortByIdItemDesc());
+        List<Item> expected = Arrays.asList(bug3, bug2, bug);
+        assertThat(allItems, is(expected));
     }
 }
