@@ -18,3 +18,7 @@ notifications:
       - rostmp@yandex.ru
     on_success: never # default: change
     on_failure: always # default: always
+
+env:
+  global:
+    - CODECOV_TOKEN="51aa2a94-b33f-4194-ab00-4a309ed08419"
