@@ -5,10 +5,8 @@ import java.util.Comparator;
 public class LexSort implements Comparator<String> {
     @Override
     public int compare(String left, String right) {
-        int indexDot = left.indexOf(".");
-        int indexDot2 = right.indexOf(".");
-        int numberLeft = Integer.parseInt(left.substring(0, indexDot));
-        int numberRight = Integer.parseInt(right.substring(0, indexDot2));
+        int numberLeft = Integer.parseInt(left.split("\\.")[0]);
+        int numberRight = Integer.parseInt(right.split("\\.")[0]);
         return Integer.compare(numberLeft, numberRight);
     }
 }
