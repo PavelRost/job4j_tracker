@@ -7,22 +7,14 @@ public class Departments {
         Set<String> tmp = new LinkedHashSet<>();
         for (String value : deps) {
             String start = "";
-            if (value.contains("/")) {
-                String[] temp = value.split("/");
-                for (int i = 0; i < temp.length; i++) {
-                    if (i == 0) {
-                        start = temp[i];
-                        tmp.add(start);
-                    } else {
-                        tmp.add(start + "/" + temp[i]);
-                    }
-
+            for (String el : value.split("/")) {
+                if ("".equals(start) || "k1".equals(el) || "k2".equals(el)) {
+                    start = el;
+                    tmp.add(start);
+                } else {
+                    tmp.add(start + "/" + el);
                 }
-            } else {
-                start = value;
-                tmp.add(start);
             }
-
         }
         return new ArrayList<>(tmp);
     }
