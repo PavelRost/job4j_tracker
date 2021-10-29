@@ -20,6 +20,10 @@ public class Student {
         return surname;
     }
 
+    public Student getStudent() {
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

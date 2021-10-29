@@ -3,9 +3,10 @@ package ru.job4j.stream;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -63,6 +64,29 @@ public class SchoolTest {
         expected.add(new Student(10, "Surname1"));
         expected.add(new Student(30, "Surname3"));
         expected.add(new Student(40, "Surname4"));
+        assertThat(rsl, is(expected));
+    }
+
+    @Test
+    public void whenCollectToMapWithoutDuplicate() {
+        Student student1 = new Student(10, "Surname1");
+        Student student2 = new Student(20, "Surname2");
+        Student student3 = new Student(30, "Surname3");
+        Student student4 = new Student(40, "Surname4");
+        List<Student> students = new ArrayList<>();
+        students.add(student1);
+        students.add(student1);
+        students.add(student2);
+        students.add(student3);
+        students.add(student3);
+        students.add(student4);
+        School sc = new School();
+        Map<String, Student> rsl = sc.collectToMap(students);
+        Map<String, Student> expected = new HashMap<>();
+        expected.put(student1.getSurname(), student1);
+        expected.put(student2.getSurname(), student2);
+        expected.put(student3.getSurname(), student3);
+        expected.put(student4.getSurname(), student4);
         assertThat(rsl, is(expected));
     }
 }
