@@ -17,8 +17,8 @@ public class ProfilesTest {
         Profiles profiles = new Profiles();
         List<Address> rsl = profiles.collect(profilesClient);
         List<Address> expected = List.of(
-                new Address("Moscow", "Lovkacha", 15, 63),
                 new Address("Kaliningrad", "Gromovoy", 63, 10),
+                new Address("Moscow", "Lovkacha", 15, 63),
                 new Address("Smolensk", "Lenina", 6, 15)
         );
         assertThat(rsl, is(expected));
