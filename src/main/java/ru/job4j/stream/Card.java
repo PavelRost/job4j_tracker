@@ -14,11 +14,16 @@ public class Card {
         this.value = value;
     }
 
+    @Override
+    public String toString() {
+        return "Card{" + "suit=" + suit + ", value=" + value + '}';
+    }
+
     public static void main(String[] args) {
-        List<String> cards = new ArrayList<>();
+
         Stream.of(Suit.values())
                 .flatMap(suit -> Stream.of(Value.values())
-                        .map(value -> suit.toString() + " " + value.toString()))
-                .collect(Collectors.toCollection(() -> cards));
+                        .map(value -> new Card(suit, value)))
+                .forEach(System.out::println);
     }
 }
