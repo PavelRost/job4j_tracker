@@ -17,8 +17,7 @@ public class FlatIt {
 
 //        return iteratorToStream(it)
 //                .flatMap(f -> Stream.of(f.next()))
-//                .collect(Collectors.toList());
-//
+//                .collect(Collectors.toList());//
 //        return iteratorToStream(it)
 //                .map(Iterator::next)
 //                .collect(Collectors.toList());
