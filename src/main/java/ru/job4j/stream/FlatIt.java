@@ -11,8 +11,7 @@ import java.util.stream.*;
 public class FlatIt {
     public static List<Integer> flatten(Iterator<Iterator<Integer>> it) {
         return iteratorToStream(it)
-                .filter(Iterator::hasNext)
-                .map(Iterator::next)
+                .flatMap(FlatIt::iteratorToStream)
                 .collect(Collectors.toList());
     }
 
