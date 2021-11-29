@@ -124,13 +124,12 @@ public class SqlTracker implements Store {
     @Override
     public Item findById(int id) {
         Item items = null;
-        try (PreparedStatement statement = cn.prepareStatement("select * from items;")) {
+        try (PreparedStatement statement =
+                     cn.prepareStatement("select * from items where id = ?;")) {
+            statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    if (id == resultSet.getInt("id")) {
-                        items = getItem(resultSet);
-                        break;
-                    }
+                if (resultSet.next()) {
+                    items = getItem(resultSet);
                 }
             }
         } catch (SQLException throwables) {
