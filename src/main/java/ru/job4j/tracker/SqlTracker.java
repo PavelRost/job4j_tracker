@@ -86,9 +86,7 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement = cn.prepareStatement("select * from items;")) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    items.add(new Item(
-                            resultSet.getInt("id"),
-                            resultSet.getString("name")));
+                    items.add(getItem(resultSet));
                 }
             }
         } catch (SQLException throwables) {
@@ -105,9 +103,7 @@ public class SqlTracker implements Store {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     if (key.equals(resultSet.getString("name"))) {
-                        items.add(new Item(
-                                resultSet.getInt("id"),
-                                resultSet.getString("name")));
+                        items.add(getItem(resultSet));
                     }
                 }
             }
@@ -124,9 +120,8 @@ public class SqlTracker implements Store {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     if (id == resultSet.getInt("id")) {
-                        items = new Item(
-                                resultSet.getInt("id"),
-                                resultSet.getString("name"));
+                        items = getItem(resultSet);
+                        break;
                     }
                 }
             }
@@ -134,5 +129,18 @@ public class SqlTracker implements Store {
             throwables.printStackTrace();
         }
         return items;
+    }
+
+    private Item getItem(ResultSet resultSet) {
+        Item item = null;
+        try {
+            item = new Item(
+                    resultSet.getInt("id"),
+                    resultSet.getString("name"),
+                    resultSet.getTimestamp("created").toLocalDateTime());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return item;
     }
 }
