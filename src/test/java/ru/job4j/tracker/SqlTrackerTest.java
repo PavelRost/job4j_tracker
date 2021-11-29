@@ -84,7 +84,7 @@ public class SqlTrackerTest {
     public void whenFindAllThenSuccess() {
         SqlTracker tracker = new SqlTracker(connection);
         List<Item> items =
-                new ArrayList<>(List.of(new Item("item1"), new Item("item2"), new Item("item3")));
+                List.of(new Item("item1"), new Item("item2"), new Item("item3"));
         items.forEach(tracker::add);
         assertEquals(items, tracker.findAll());
     }
