@@ -14,6 +14,8 @@ public class HibernateRun {
                 .configure().build();
         try {
             SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+            Item itemHibernate = create(new Item("item with Hibernate", "Hibernate forever"), sf);
+            System.out.println(itemHibernate);
             Item item = create(new Item("Learn Hibernate"), sf);
             System.out.println(item);
             item.setName("Learn Hibernate 5.");
