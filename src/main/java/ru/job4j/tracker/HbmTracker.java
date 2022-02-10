@@ -5,9 +5,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 public class HbmTracker implements Store, AutoCloseable {
 
@@ -32,32 +34,24 @@ public class HbmTracker implements Store, AutoCloseable {
 
     @Override
     public boolean replace(int id, Item item) {
-        boolean rsl = false;
-        if (findById(id) != null) {
-            Session session = sf.openSession();
-            session.beginTransaction();
-            session.update(item);
-            session.getTransaction().commit();
-            session.close();
-            rsl = true;
-        }
-        return rsl;
+        Session session = sf.openSession();
+        session.beginTransaction();
+        session.update(item);
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 
     @Override
     public boolean delete(int id) {
-        boolean rsl = false;
-        if (findById(id) != null) {
-            Session session = sf.openSession();
-            session.beginTransaction();
-            Item item = new Item(null);
-            item.setId(id);
-            session.delete(item);
-            session.getTransaction().commit();
-            session.close();
-            rsl = true;
-        }
-        return rsl;
+        Session session = sf.openSession();
+        session.beginTransaction();
+        Item item = new Item(null);
+        item.setId(id);
+        session.delete(item);
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 
     @Override
@@ -72,14 +66,11 @@ public class HbmTracker implements Store, AutoCloseable {
 
     @Override
     public List<Item> findByName(String key) {
-        List<Item> rsl = new ArrayList<>();
-        List<Item> temp = findAll();
-        for (Item item : temp) {
-            if (key.equals(item.getName())) {
-                rsl.add(item);
-            }
-        }
-        return rsl;
+        Session session = sf.openSession();
+        session.getTransaction();
+        Query query = session.createQuery("from Item i where i.name = :nm");
+        query.setParameter("nm", key);
+        return query.list();
     }
 
     @Override
