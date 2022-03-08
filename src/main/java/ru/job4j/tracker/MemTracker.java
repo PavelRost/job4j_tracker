@@ -23,6 +23,13 @@ public class MemTracker implements Store {
         return new ArrayList<>(items);
     }
 
+    public List<Item> findAll(Observe<Item> observe) {
+        for (Item item : items) {
+            observe.receive(item);
+        }
+        return null;
+    }
+
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
         for (Item item : items) {
