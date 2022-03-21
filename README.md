@@ -1,4 +1,17 @@
 # job4j_tracker
 
-[![Build Status](https://app.travis-ci.com/PavelRost/job4j_tracker.svg?branch=master)](https://app.travis-ci.com/PavelRost/job4j_tracker)
-[![codecov](https://codecov.io/gh/PavelRost/job4j_tracker/branch/master/graph/badge.svg?token=DVCVZX06S3)](https://codecov.io/gh/PavelRost/job4j_tracker)
+Данный репозиторий содержит пакеты, посвященные рассмотрению различных тем, связанных с Java.
+
+Package **Tracker** содержит консольное приложение, позволяющее работать с заявками.
+Поддерживаются следующие возможности:
+- добавление заявки;
+- показать все заявки;
+- редактирование заявки;
+- удаление заявки;
+- поиск заявки по id;
+- поиск заявки по имени;
+- завершение работы приложения через команду.
+
+Экран приложения:
+
+![Screenshot_3](https://user-images.githubusercontent.com/92044501/159293409-d992abe9-76d6-4392-b441-7c11395edf7e.jpg)
